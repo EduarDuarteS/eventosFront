@@ -39,6 +39,8 @@ export class LoginComponent implements OnInit {
     }
 
     const userLogin = new Login(forma.value.username, forma.value.password);
+    this.router.navigate(['/cursos']); //borrar
+
     this.authService.login(userLogin)
       .subscribe(
         result => {
@@ -53,9 +55,8 @@ export class LoginComponent implements OnInit {
         }
       );
   }
-  // "username": "eduard",
-  // "password": "2614eduard2614"
 
-  //     "username": "profesoruno",
-  // "password": "2614eduard"
+
+
+
 }

@@ -86,6 +86,10 @@ export class AuthService implements CanActivate {
     }
     return signedIn;
   }
+  // canActivate(): boolean {
+  //   return true;
+  // }
+
 }
 
 interface Response {
