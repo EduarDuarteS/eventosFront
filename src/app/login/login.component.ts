@@ -32,13 +32,13 @@ export class LoginComponent implements OnInit {
   }
   // this.usuario
   ingresar(forma: NgForm) {
-    console.log(forma);
+    console.log("forma: ", forma);
     if (forma.invalid) {
       Swal.fire('Oops...', 'revisa los datos ingresados', 'error');
       return;
     }
 
-    const userLogin = new Login(forma.value.username, forma.value.password);
+    const userLogin = new Login(forma.value.email, forma.value.password);
     this.router.navigate(['/cursos']); //borrar
 
     this.authService.login(userLogin)

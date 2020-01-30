@@ -18,8 +18,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 // Modulos
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { HttpClientModule  } from '@angular/common/http';
 import { VideoModalModule } from './video-modal/video-modal.module';
 import { VideoAlumnoModule } from './video-alumno/video-alumno.module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -55,12 +54,6 @@ import { GestureConfig } from '@angular/material';
     {
       provide: MAT_DIALOG_DATA,
       useValue: {}} ,
-
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    },
     { provide: HAMMER_GESTURE_CONFIG,
       useClass: GestureConfig }
   ],

@@ -5,6 +5,8 @@ import { InfoLogin } from '../../models/infoLogin.model';
 import { AlumnoLogin } from '../../models/alumnoLogin.model';
 import { ProfesorLogin } from '../../models/profesorLogin.model';
 import { Login } from '../../models/login.model';
+import { Persona } from "../../models/persona.model";
+
 import { Observable } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -15,7 +17,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService implements CanActivate {
 
-  authUrl = `${environment.apiUrl}/users/api-token-auth/`;
+  authUrl = `${environment.apiUrl}/login`;
 
   // Http Headers
   httpOptions = {
@@ -26,7 +28,7 @@ export class AuthService implements CanActivate {
   dataLog: InfoLogin = {
     userToken: null,
     isAlumno: null,
-    dataAlumno: null,
+    dataAlumno: new AlumnoLogin(new Persona("","",""),""),
     dataProfesor: null
   };
 
@@ -34,20 +36,35 @@ export class AuthService implements CanActivate {
     console.log('se llamo el servicio');
   }
 
-  login(usuario: Login): Observable<InfoLogin> {
+  login(usuario: Login): Observable<Response> {
+    console.log(JSON.stringify(usuario));
+
     return this.http.post(this.authUrl, JSON.stringify(usuario), this.httpOptions)
       .pipe(
-        map((response: Response) => {
-          this.dataLog.userToken = response.token;
-          if (response.user.codigo_de_estudiante != undefined) {
+        map((response: any) => {
+          console.log('response: ',response);
+
+          // this.dataLog.userToken = response.token;
+          // if (response.user.codigo_de_estudiante != undefined) {
+          //   this.dataLog.isAlumno = true;
+          //   this.dataLog.dataAlumno = response.user;
+          // } else {
+          //   this.dataLog.isAlumno = false;
+          //   this.dataLog.dataProfesor = response.user;
+          // }
+          // this.storage(this.dataLog);
+          this.dataLog.userToken = response.data.contrasena;
             this.dataLog.isAlumno = true;
-            this.dataLog.dataAlumno = response.user;
-          } else {
-            this.dataLog.isAlumno = false;
-            this.dataLog.dataProfesor = response.user;
-          }
+            console.log(response.data.id_user);
+
+            this.dataLog.dataAlumno.codigo_de_estudiante = response.data.id_user;
+            this.dataLog.dataAlumno.persona.username =response.data.email;
+            this.dataLog.dataAlumno.persona.email=response.data.email;
+            this.dataLog.dataAlumno.persona.first_name=response.data.nombres;
+            this.dataLog.dataAlumno.persona.last_name=response.data.apellidos;
           this.storage(this.dataLog);
-          return this.dataLog;
+          console.log("dataLog: ", this.dataLog);
+          return response;
         }),
         retry(1),
         catchError(err => {
