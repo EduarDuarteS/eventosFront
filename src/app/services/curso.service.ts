@@ -28,14 +28,14 @@ export class CursoService {
   };
 
   delEvent(id_user, id_event): Observable<any> {
-    let delEventUrl = `${environment.apiUrl}/deleteEvent`;
+    let delEventUrl = `${environment.apiUrl}/deleteEvent?id=${id_event}&id_user=${id_user}`;
     console.log("delEventUrl", delEventUrl);
     let evento =  { id: id_event, id_user: id_user  }
     console.log(evento);
     console.log(JSON.stringify(evento));
 
     // return this.httpClient.get<any>(eventosUrl);
-    return this.httpClient.delete(delEventUrl, JSON.stringify(evento), this.httpOptions)
+    return this.httpClient.delete(delEventUrl, this.httpOptions)
       .pipe(
         map((response: any) => {
           console.log('response: ',response);
