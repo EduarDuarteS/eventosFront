@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
-
-
+import { RegisterService } from '../services/usuario/auth.service';
 import { Router } from '@angular/router';
 
 declare function init_plugins();
@@ -18,7 +17,8 @@ export class RegisterComponent implements OnInit {
   forma: FormGroup;
 
   constructor(
-    public router: Router
+    public router: Router,
+    public registerService: RegisterService
   ) { }
 
   //Realizar registro de Usuario -- registrar(forma: NgForm) {
@@ -37,6 +37,22 @@ export class RegisterComponent implements OnInit {
     }
     Swal.fire('Registrado!', 'Su registro se ha realizado con exito.', 'success')
       .then(() => {
+        console.log(forma.value);
+
+        this.registerService.register(forma.value)
+          .subscribe(
+            result => {
+              console.log(result);
+            },
+            error => {
+              console.log(error);
+              Swal.fire('Oops...', 'revisa los datos ingresados', 'error');
+            },
+            () => {
+              this.router.navigate(['/cursos']);
+            }
+          );
+
         this.router.navigate(['/login']);
       });
   }

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 //SERVICIOS
 import { AuthService } from './usuario/auth.service';
+import { RegisterService } from "./usuario/register.service";
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { AuthService } from './usuario/auth.service';
   ],
   providers: [
     AuthService,
+    RegisterService,
   ],
   declarations: []
 })

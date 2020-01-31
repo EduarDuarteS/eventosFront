@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
     }
 
     const userLogin = new Login(forma.value.email, forma.value.password);
-    this.router.navigate(['/cursos']); //borrar
 
     this.authService.login(userLogin)
       .subscribe(
