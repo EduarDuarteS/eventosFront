@@ -21,7 +21,7 @@ export class ListaCursosComponent implements OnInit {
     let user = this.authService.getDatos();
     console.log(user);
 
-    this.cursoService.getEventos(4).subscribe(eventos => {
+    this.cursoService.getEventos(user.dataAlumno.codigo_de_estudiante).subscribe(eventos => {
       console.log('data', eventos);
       this.eventos = eventos;
     });
