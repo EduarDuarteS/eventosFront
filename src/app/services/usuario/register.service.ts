@@ -38,6 +38,7 @@ export class RegisterService implements CanActivate {
 
   register(usuario: Login): Observable<Response> {
     console.log(JSON.stringify(usuario));
+    console.log(this.authUrl);
 
     return this.http.post(this.authUrl, JSON.stringify(usuario), this.httpOptions)
       .pipe(
