@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { ListaCursosComponent } from './lista-cursos/lista-cursos.component';
 import { MaterialModule } from 'src/material.module';
+import { DialogOverviewExampleDialog } from './lista-cursos/lista-cursos.component';
 
 const routes: Routes = [
   { path: '', component: ListaCursosComponent },
 ];
 
 @NgModule({
-  declarations: [ListaCursosComponent],
+  declarations: [ListaCursosComponent, DialogOverviewExampleDialog],
   imports: [
     CommonModule,
     MaterialModule,

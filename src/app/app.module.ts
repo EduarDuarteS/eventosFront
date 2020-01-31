@@ -13,7 +13,7 @@ import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from '../material.module';
 import { YoutubePlayerModule } from 'ng2-youtube-player';
 import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { DialogOverviewExampleDialog } from "./cursos/lista-cursos/lista-cursos.component";
 
 // Modulos
 import { LoginComponent } from './login/login.component';
@@ -49,6 +49,7 @@ import { GestureConfig } from '@angular/material';
     MDBBootstrapModule.forRoot(),
     ToastrModule.forRoot()
   ],
+  entryComponents: [DialogOverviewExampleDialog],
   providers: [
     { provide: MatDialogRef, useValue: {} },
     {
