@@ -35,7 +35,7 @@ export class CursoService {
     console.log(JSON.stringify(evento));
 
     // return this.httpClient.get<any>(eventosUrl);
-    return this.httpClient.post(delEventUrl, JSON.stringify(evento), this.httpOptions)
+    return this.httpClient.delete(delEventUrl, JSON.stringify(evento), this.httpOptions)
       .pipe(
         map((response: any) => {
           console.log('response: ',response);
