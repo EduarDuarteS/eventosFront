@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment';
 })
 export class RegisterService implements CanActivate {
 
-  authUrl = `${environment.apiUrl}/login`;
+  authUrl = `${environment.apiUrl}/createUser`;
 
   // Http Headers
   httpOptions = {
@@ -44,26 +44,6 @@ export class RegisterService implements CanActivate {
         map((response: any) => {
           console.log('response: ',response);
 
-          // this.dataLog.userToken = response.token;
-          // if (response.user.codigo_de_estudiante != undefined) {
-          //   this.dataLog.isAlumno = true;
-          //   this.dataLog.dataAlumno = response.user;
-          // } else {
-          //   this.dataLog.isAlumno = false;
-          //   this.dataLog.dataProfesor = response.user;
-          // }
-          // this.storage(this.dataLog);
-          this.dataLog.userToken = response.data.contrasena;
-            this.dataLog.isAlumno = true;
-            console.log(response.data.id_user);
-
-            this.dataLog.dataAlumno.codigo_de_estudiante = response.data.id_user;
-            this.dataLog.dataAlumno.persona.username =response.data.email;
-            this.dataLog.dataAlumno.persona.email=response.data.email;
-            this.dataLog.dataAlumno.persona.first_name=response.data.nombres;
-            this.dataLog.dataAlumno.persona.last_name=response.data.apellidos;
-          this.storage(this.dataLog);
-          console.log("dataLog: ", this.dataLog);
           return response;
         }),
         retry(1),
