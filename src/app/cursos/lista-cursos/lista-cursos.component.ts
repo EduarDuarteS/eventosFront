@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CursoService } from 'src/app/services/curso.service';
+import { AuthService } from '../../services/usuario/auth.service';
+
 
 @Component({
   selector: 'app-lista-cursos',
@@ -8,14 +10,20 @@ import { CursoService } from 'src/app/services/curso.service';
 })
 export class ListaCursosComponent implements OnInit {
 
-  cursos;
+  eventos;
 
-  constructor(private cursoService: CursoService) { }
+  constructor(
+    private cursoService: CursoService,
+    public authService: AuthService
+  ) { }
 
   ngOnInit() {
-    this.cursoService.getCursos().subscribe(cursos => {
-      console.log('data', cursos);
-      this.cursos = cursos;
+    let user = this.authService.getDatos();
+    console.log(user);
+
+    this.cursoService.getEventos(4).subscribe(eventos => {
+      console.log('data', eventos);
+      this.eventos = eventos;
     });
   }
 

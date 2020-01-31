@@ -29,10 +29,10 @@ export class AddContenidoACursoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cursoService.getCursosDisponibles(this.data.contenidoId).subscribe(cursos => {
-      console.log('data', cursos);
-      this.cursos = cursos;
-    });
+    // this.cursoService.getCursosDisponibles(this.data.contenidoId).subscribe(cursos => {
+    //   console.log('data', cursos);
+    //   this.cursos = cursos;
+    // });
   }
 
   asociarContenido() {

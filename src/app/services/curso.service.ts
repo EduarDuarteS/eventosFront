@@ -8,15 +8,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CursoService {
 
-  private cursoUrl = `${environment.apiUrl}/content/courses/`;
 
   constructor(private httpClient: HttpClient) { }
 
-  getCursos(): Observable<any> {
-    return this.httpClient.get<any>(this.cursoUrl);
+  getEventos(id_user): Observable<any> {
+    let eventosUrl = `${environment.apiUrl}/events?id_user=${id_user}`;
+    console.log("eventosUrl",eventosUrl);
+
+    return this.httpClient.get<any>(eventosUrl);
   }
 
-  getCursosDisponibles(contenidoId): Observable<any> {
-    return this.httpClient.get<any>(`${this.cursoUrl}${contenidoId}`);
-  }
 }
