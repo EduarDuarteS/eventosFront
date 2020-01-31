@@ -1,5 +1,8 @@
 <div class="container">
     <h1>Eventos</h1>
+    <button mat-button (click)="openDialog()">Crear Evento</button>
+
+
     <div class="flex-grid">
         <div class="col" *ngFor="let evento of eventos">
           <mat-card class="example-card">
