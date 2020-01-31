@@ -11,20 +11,29 @@ import { AuthService } from '../../services/usuario/auth.service';
 export class ListaCursosComponent implements OnInit {
 
   eventos;
+  user;
 
   constructor(
-    private cursoService: CursoService,
+    private eventoService: CursoService,
     public authService: AuthService
   ) { }
 
   ngOnInit() {
-    let user = this.authService.getDatos();
-    console.log(user);
+    this.user = this.authService.getDatos();
+    console.log(this.user);
 
-    this.cursoService.getEventos(user.dataAlumno.codigo_de_estudiante).subscribe(eventos => {
+    this.eventoService.getEventos(this.user.dataAlumno.codigo_de_estudiante).subscribe(eventos => {
       console.log('data', eventos);
       this.eventos = eventos;
     });
   }
 
+  delEvent(id_event) {
+      console.log("id_event: ", id_event);
+
+        this.eventoService.delEvent(this.user.dataAlumno.codigo_de_estudiante, id_event).subscribe(eventos => {
+          console.log('data', eventos);
+          this.eventos = eventos;
+        });
+  }
 }

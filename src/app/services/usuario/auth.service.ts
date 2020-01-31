@@ -44,15 +44,6 @@ export class AuthService implements CanActivate {
         map((response: any) => {
           console.log('response: ',response);
 
-          // this.dataLog.userToken = response.token;
-          // if (response.user.codigo_de_estudiante != undefined) {
-          //   this.dataLog.isAlumno = true;
-          //   this.dataLog.dataAlumno = response.user;
-          // } else {
-          //   this.dataLog.isAlumno = false;
-          //   this.dataLog.dataProfesor = response.user;
-          // }
-          // this.storage(this.dataLog);
           this.dataLog.userToken = response.data.contrasena;
             this.dataLog.isAlumno = true;
             console.log(response.data.id_user);
