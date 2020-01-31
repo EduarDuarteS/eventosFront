@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { RegisterService } from '../services/usuario/auth.service';
+import { RegisterService } from '../services/usuario/register.service';
 import { Router } from '@angular/router';
 
 declare function init_plugins();
