@@ -15,7 +15,7 @@ const routes: Routes = [
     canActivate: [AuthService],
     children: [
       {
-        path: 'cursos',
+        path: 'eventos',
         loadChildren: './cursos/cursos.module#CursosModule',
         data: { preload: true }
       },
