@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { DatePipe } from "@angular/common";
+import { DatePipe, DOCUMENT  } from "@angular/common";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CursoService } from 'src/app/services/curso.service';
 import { AuthService } from '../../services/usuario/auth.service';
@@ -25,11 +25,13 @@ export class ListaCursosComponent implements OnInit {
   user;
   animal: string;
   name: string;
+  data;
 
   constructor(
     private eventoService: CursoService,
     public authService: AuthService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    @Inject(DOCUMENT) private _document: Document
   ) { }
 
   ngOnInit() {
@@ -48,6 +50,7 @@ export class ListaCursosComponent implements OnInit {
     this.eventoService.delEvent(this.user.dataAlumno.codigo_de_estudiante, id_event).subscribe(eventos => {
       console.log('data', eventos);
       this.eventos = eventos;
+      this.refresh();
     });
   }
 
@@ -56,13 +59,13 @@ export class ListaCursosComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '350px',
       data: {
-        nombre: this.nombre,
-        lugar: this.lugar,
-        direccion: this.direccion,
-        date_inicio: this.date_inicio,
-        date_fin: this.date_fin,
-        tipo_evento: this.tipo_evento,
-        id_categoria: this.id_categoria
+        // nombre: this.nombre,
+        // lugar: this.lugar,
+        // direccion: this.direccion,
+        // date_inicio: this.date_inicio,
+        // date_fin: this.date_fin,
+        // tipo_evento: this.tipo_evento,
+        // id_categoria: this.id_categoria
       }
     });
 
@@ -77,6 +80,7 @@ export class ListaCursosComponent implements OnInit {
 
       this.eventoService.createEvent(result).subscribe(respuesta => {
         console.log('data', respuesta);
+        this.refresh();
       });
       // console.log("result:", result);
       // // json.stringify(result);
@@ -90,6 +94,9 @@ export class ListaCursosComponent implements OnInit {
       // console.log(datepipe.transform(new Date(), "MM-dd-yyyy"));
     });
   }
+  refresh(): void {
+    this._document.defaultView.location.reload();
+}
 
 }
 
