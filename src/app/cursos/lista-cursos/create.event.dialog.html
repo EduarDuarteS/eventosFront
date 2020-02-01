@@ -40,5 +40,10 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button [mat-dialog-close]="data" >Crear Evento</button>
+  <div class="" *ngIf="!data.id">
+    <button mat-button [mat-dialog-close]="data" >Crear Evento</button>
+  </div>
+  <div class="" *ngIf="data.id">
+    <button mat-button [mat-dialog-close]="data" >Guardar</button>
+  </div>
 </div>

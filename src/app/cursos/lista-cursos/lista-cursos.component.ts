@@ -44,6 +44,10 @@ export class ListaCursosComponent implements OnInit {
     });
   }
 
+editarEvent(event){
+  this.openDialogEdit(event);
+}
+
   delEvent(id_event) {
     console.log("id_event: ", id_event);
 
@@ -53,6 +57,30 @@ export class ListaCursosComponent implements OnInit {
       this.refresh();
     });
   }
+
+  //dialog popup
+  openDialogEdit(event): void {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '350px',
+      data: event
+    });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          // this.animal = result;
+          result.date_inicio="2020/03/07";
+          result.date_fin="2020/04/07";
+          result.id_categoria = +result.id_categoria;
+          result.id_user = this.user.dataAlumno.codigo_de_estudiante
+          console.log(result);
+
+          // this.eventoService.createEvent(result).subscribe(respuesta => {
+          //   console.log('data', respuesta);
+          //   this.refresh();
+          // });
+
+        });
+      }
 
   //dialog popup
   openDialog(): void {
@@ -68,6 +96,7 @@ export class ListaCursosComponent implements OnInit {
         // id_categoria: this.id_categoria
       }
     });
+
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
@@ -94,6 +123,8 @@ export class ListaCursosComponent implements OnInit {
       // console.log(datepipe.transform(new Date(), "MM-dd-yyyy"));
     });
   }
+
+
   refresh(): void {
     this._document.defaultView.location.reload();
 }
