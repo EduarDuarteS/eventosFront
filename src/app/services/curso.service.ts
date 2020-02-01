@@ -10,8 +10,33 @@ import { retry, catchError, map } from 'rxjs/operators';
 })
 export class CursoService {
 
-
+  // Http Headers
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
   constructor(private httpClient: HttpClient) { }
+
+  createEvent(evento): Observable<any> {
+    let eventosUrl = `${environment.apiUrl}/creatEvent`;
+    console.log("eventosUrl",eventosUrl);
+
+    return this.httpClient.post(eventosUrl, JSON.stringify(evento), this.httpOptions)
+      .pipe(
+        map((response: any) => {
+          console.log('response: ',response);
+
+          return response;
+        }),
+        retry(1),
+        catchError(err => {
+          console.log('Error creando evento', err);
+          return Observable.throw(err);
+        }
+        )
+      );
+  }
 
   getEventos(id_user): Observable<any> {
     let eventosUrl = `${environment.apiUrl}/events?id_user=${id_user}`;

@@ -30,7 +30,8 @@ import { GestureConfig } from '@angular/material';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    DialogOverviewExampleDialog
   ],
   imports: [
     SharedModule,

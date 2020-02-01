@@ -1,11 +1,17 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { DatePipe } from "@angular/common";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CursoService } from 'src/app/services/curso.service';
 import { AuthService } from '../../services/usuario/auth.service';
 
 export interface DialogData {
-  animal: string;
-  name: string;
+  nombre: string,
+  lugar: string,
+  direccion: string,
+  date_inicio: DatePipe,
+  date_fin: DatePipe,
+  tipo_evento: string,
+  id_categoria: number
 }
 
 @Component({
@@ -48,13 +54,40 @@ export class ListaCursosComponent implements OnInit {
   //dialog popup
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: { name: this.name, animal: this.animal }
+      width: '350px',
+      data: {
+        nombre: this.nombre,
+        lugar: this.lugar,
+        direccion: this.direccion,
+        date_inicio: this.date_inicio,
+        date_fin: this.date_fin,
+        tipo_evento: this.tipo_evento,
+        id_categoria: this.id_categoria
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.animal = result;
+      // this.animal = result;
+      result.date_inicio="2020/03/07";
+      result.date_fin="2020/04/07";
+      result.id_categoria = +result.id_categoria;
+      result.id_user = this.user.dataAlumno.codigo_de_estudiante
+      console.log(result);
+
+      this.eventoService.createEvent(result).subscribe(respuesta => {
+        console.log('data', respuesta);
+      });
+      // console.log("result:", result);
+      // // json.stringify(result);
+      // console.log("result.date_inicio: ", result.date_inicio);
+      // const datepipe: DatePipe = new DatePipe();
+      // var ddMMyyyy = result.date_inicio.transform(new Date(), "dd-MM-yyyy");
+      // console.log(ddMMyyyy); //output - 14-02-2019
+      // // var datePipe = new DatePipe(result.date_inicio);
+      // console.log(result.date_inicio.getDay);
+      // console.log(datepipe.transform(result.date_inicio, 'dd/MM/yyyy'));
+      // console.log(datepipe.transform(new Date(), "MM-dd-yyyy"));
     });
   }
 
