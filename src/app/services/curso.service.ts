@@ -45,13 +45,6 @@ export class CursoService {
     return this.httpClient.get<any>(eventosUrl);
   }
 
-  // Http Headers
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
-
   delEvent(id_user, id_event): Observable<any> {
     let delEventUrl = `${environment.apiUrl}/deleteEvent?id=${id_event}&id_user=${id_user}`;
     console.log("delEventUrl", delEventUrl);
