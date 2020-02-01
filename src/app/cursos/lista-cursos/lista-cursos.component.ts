@@ -44,7 +44,12 @@ export class ListaCursosComponent implements OnInit {
     });
   }
 
-editarEvent(event){
+editarEvent(event, num){
+  console.log("log: ",num);
+  if(num==='01')
+    event.id_user=num;
+  else
+    event.id_user='';
   this.openDialogEdit(event);
 }
 
