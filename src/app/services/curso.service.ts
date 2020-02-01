@@ -18,6 +18,27 @@ export class CursoService {
   };
   constructor(private httpClient: HttpClient) { }
 
+  editEvent(evento): Observable<any> {
+    let eventosUrl = `${environment.apiUrl}/updatevent`;
+    console.log("eventosUrl",eventosUrl);
+
+    return this.httpClient.put(eventosUrl, JSON.stringify(evento), this.httpOptions)
+      .pipe(
+        map((response: any) => {
+          console.log('response: ',response);
+
+          return response;
+        }),
+        retry(1),
+        catchError(err => {
+          console.log('Error creando evento', err);
+          return Observable.throw(err);
+        }
+        )
+      );
+  }
+
+
   createEvent(evento): Observable<any> {
     let eventosUrl = `${environment.apiUrl}/creatEvent`;
     console.log("eventosUrl",eventosUrl);

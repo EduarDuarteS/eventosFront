@@ -79,10 +79,10 @@ editarEvent(event, num){
           result.id_user = this.user.dataAlumno.codigo_de_estudiante
           console.log(result);
 
-          // this.eventoService.createEvent(result).subscribe(respuesta => {
-          //   console.log('data', respuesta);
-          //   this.refresh();
-          // });
+          this.eventoService.editEvent(result).subscribe(respuesta => {
+            console.log('data', respuesta);
+            this.refresh();
+          });
 
         });
       }
